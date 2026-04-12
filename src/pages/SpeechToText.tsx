@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, RotateCcw, Copy, Download, Trash2, Languages, Sparkles, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { cn } from '@/src/lib/utils';
+import { cn } from '../lib/utils';
 import { GoogleGenAI } from "@google/genai";
 import { toast } from 'sonner';
 

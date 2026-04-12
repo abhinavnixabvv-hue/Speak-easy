@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, Play, Pause, RotateCcw, Type, AlignLeft, Sun, Moon, Accessibility, Sparkles, Loader2, Copy, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { cn } from '@/src/lib/utils';
-import { useSettings } from '@/src/components/SettingsContext';
+import { cn } from '../lib/utils';
+import { useSettings } from '../components/SettingsContext';
 import { GoogleGenAI } from "@google/genai";
 import { toast } from 'sonner';
 

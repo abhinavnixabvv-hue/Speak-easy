@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Camera, Eye, Loader2, Volume2, RefreshCw, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { GoogleGenAI } from "@google/genai";
-import { cn } from '@/src/lib/utils';
+import { cn } from '../lib/utils';
 
 export const VisionAssistance: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

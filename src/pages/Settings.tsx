@@ -1,8 +1,8 @@
 import React from 'react';
 import { Settings as SettingsIcon, Sun, Moon, Accessibility, Volume2, Info, Github } from 'lucide-react';
 import { motion } from 'motion/react';
-import { cn } from '@/src/lib/utils';
-import { useSettings } from '@/src/components/SettingsContext';
+import { cn } from '../lib/utils';
+import { useSettings } from '../components/SettingsContext';
 
 export const Settings: React.FC = () => {
   const { settings, updateSettings } = useSettings();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from "@/src/components/ui/button";
+import { Button } from "./ui/button";
 
 export const TextToSign: React.FC = () => {
   const [text, setText] = useState('');

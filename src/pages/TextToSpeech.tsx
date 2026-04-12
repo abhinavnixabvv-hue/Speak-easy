@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Volume2, Play, Pause, RotateCcw, Settings as SettingsIcon, Trash2, Download } from 'lucide-react';
 import { motion } from 'motion/react';
-import { cn } from '@/src/lib/utils';
-import { useSettings } from '@/src/components/SettingsContext';
+import { cn } from '../lib/utils';
+import { useSettings } from '../components/SettingsContext';
 import { toast } from 'sonner';
 
 export const TextToSpeech: React.FC = () => {

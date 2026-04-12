@@ -16,7 +16,7 @@ import {
   Eye
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { cn } from '@/src/lib/utils';
+import { cn } from '../lib/utils';
 import { useSettings } from './SettingsContext';
 
 const navItems = [
@@ -56,7 +56,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <div className="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/30">
               <Accessibility size={24} />
             </div>
-            <span className="font-bold text-xl tracking-tight hidden sm:block">SpeakEasy</span>
+            <span className="font-bold text-xl tracking-tight hidden sm:block">Speek Easy</span>
           </Link>
         </div>
 
@@ -87,14 +87,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
       <div className="flex flex-1 overflow-hidden relative">
         {/* Desktop Sidebar */}
-        <motion.aside
-          initial={false}
-          animate={{ 
-            width: isSidebarOpen ? 280 : 0,
-            opacity: isSidebarOpen ? 1 : 0,
-            x: isSidebarOpen ? 0 : -20
-          }}
-          className="hidden md:flex glass-panel h-full flex-col z-50 border-r border-slate-200 dark:border-slate-800 overflow-hidden"
+        <aside
+          className={`hidden md:flex glass-panel h-full flex-col z-50 border-r border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-300 ${isSidebarOpen ? 'w-[280px] opacity-100' : 'w-0 opacity-0'}`}
         >
           <nav className="flex-1 px-4 py-6 space-y-2">
             {navItems.map((item) => {
@@ -118,37 +112,29 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               );
             })}
           </nav>
-        </motion.aside>
+        </aside>
 
         {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-[70] md:hidden"
-              />
-              <motion.div
-                initial={{ x: '100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white dark:bg-slate-900 z-[80] md:hidden shadow-2xl p-6 flex flex-col"
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-indigo-600 p-2 rounded-xl text-white">
-                      <Accessibility size={24} />
-                    </div>
-                    <span className="font-bold text-xl">SpeakEasy</span>
+        {isMobileMenuOpen && (
+          <>
+            <div
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-[70] md:hidden"
+            />
+            <div
+              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white dark:bg-slate-900 z-[80] md:hidden shadow-2xl p-6 flex flex-col"
+            >
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="bg-indigo-600 p-2 rounded-xl text-white">
+                    <Accessibility size={24} />
                   </div>
-                  <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
-                    <X size={24} />
-                  </button>
+                  <span className="font-bold text-xl">Speek Easy</span>
                 </div>
+                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
+                  <X size={24} />
+                </button>
+              </div>
 
                 <nav className="flex-1 space-y-2">
                   {navItems.map((item) => {
@@ -173,25 +159,14 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                     );
                   })}
                 </nav>
-              </motion.div>
+              </div>
             </>
           )}
-        </AnimatePresence>
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto p-4 md:p-8">
           <div className="max-w-6xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
+            {children}
           </div>
         </main>
       </div>
