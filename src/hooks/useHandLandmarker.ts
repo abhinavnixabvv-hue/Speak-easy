@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { HandLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
+import { toast } from 'sonner';
 
 export function useHandLandmarker() {
   const [isModelLoading, setIsModelLoading] = useState(false);
@@ -25,6 +26,7 @@ export function useHandLandmarker() {
         minTrackingConfidence: 0.5,
       });
       setIsModelReady(true);
+      toast.success("AI Recognition Engine Ready");
     } catch (error) {
       console.error("Failed to initialize HandLandmarker:", error);
     } finally {

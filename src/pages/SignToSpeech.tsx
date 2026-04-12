@@ -19,6 +19,7 @@ export const SignToSpeech: React.FC = () => {
   const [currentSign, setCurrentSign] = useState<GestureResult | null>(null);
   const [confidence, setConfidence] = useState(0);
   const [handLandmarks, setHandLandmarks] = useState<NormalizedLandmark[][]>([]);
+  const [videoDimensions, setVideoDimensions] = useState({ width: 1280, height: 720 });
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const animFrameRef = useRef<number>(0);
@@ -46,6 +47,14 @@ export const SignToSpeech: React.FC = () => {
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
+          videoRef.current.onloadedmetadata = () => {
+            if (videoRef.current) {
+              setVideoDimensions({
+                width: videoRef.current.videoWidth,
+                height: videoRef.current.videoHeight
+              });
+            }
+          };
           setIsCameraOn(true);
           await initModel();
         }
@@ -179,8 +188,8 @@ export const SignToSpeech: React.FC = () => {
                 />
                 <HandLandmarkCanvas 
                   landmarks={handLandmarks} 
-                  width={videoRef.current?.videoWidth || 1280} 
-                  height={videoRef.current?.videoHeight || 720} 
+                  width={videoDimensions.width} 
+                  height={videoDimensions.height} 
                 />
                 
                 {!isCameraOn && (
