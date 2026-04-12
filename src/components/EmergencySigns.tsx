@@ -60,14 +60,14 @@ export const EmergencySigns: React.FC = () => {
   ];
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 p-8 shadow-sm min-h-[400px]">
+    <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm min-h-[400px]">
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
             <Siren className="text-red-600 animate-pulse" />
             Emergency Quick Signs
           </h2>
-          <p className="text-slate-500 dark:text-slate-400">Critical signs for rapid communication in emergencies</p>
+          <p className="text-slate-500">Critical signs for rapid communication in emergencies</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => playAlert()} className="gap-2 border-red-200 text-red-600 hover:bg-red-50">
@@ -81,8 +81,8 @@ export const EmergencySigns: React.FC = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {emergencySigns.map((sign, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             onClick={() => playAlert(sign.label)}
             className={`p-6 rounded-2xl border flex items-center gap-6 cursor-pointer hover:scale-[1.02] transition-all active:scale-[0.98] shadow-sm hover:shadow-md ${sign.color}`}
           >
@@ -94,7 +94,6 @@ export const EmergencySigns: React.FC = () => {
           </div>
         ))}
       </div>
-
       <div className="mt-12 p-6 rounded-2xl bg-slate-900 text-white flex items-center gap-6 border border-slate-800">
         <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center shrink-0 shadow-lg shadow-red-900/20">
           <AlertTriangle size={24} />
