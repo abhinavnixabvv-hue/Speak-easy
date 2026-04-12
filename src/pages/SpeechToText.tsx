@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, RotateCcw, Copy, Download, Trash2, Languages, Sparkles, Loader2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { GoogleGenAI } from "@google/genai";
 import { toast } from 'sonner';
@@ -272,17 +271,11 @@ export const SpeechToText: React.FC = () => {
         <div className="space-y-6">
           <div className="glass-panel p-8 rounded-3xl text-center space-y-6">
             <div className="relative inline-block">
-              <AnimatePresence>
-                {isListening && (
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1.5, opacity: 0.2 }}
-                    exit={{ scale: 0.8, opacity: 0 }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                    className="absolute inset-0 bg-blue-500 rounded-full"
-                  />
-                )}
-              </AnimatePresence>
+              {isListening && (
+                <div
+                  className="absolute inset-0 bg-blue-500 rounded-full opacity-20 scale-150"
+                />
+              )}
               <button
                 onClick={toggleListening}
                 className={cn(
@@ -307,11 +300,9 @@ export const SpeechToText: React.FC = () => {
               {isListening && (
                 <div className="flex justify-center gap-1">
                   {[1, 2, 3, 4, 5].map(i => (
-                    <motion.div
+                    <div
                       key={i}
-                      animate={{ height: [10, 30, 10] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: i * 0.1 }}
-                      className="w-1 bg-blue-500 rounded-full"
+                      className="w-1 bg-blue-500 rounded-full h-4 animate-pulse"
                     />
                   ))}
                 </div>

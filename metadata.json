@@ -1,5 +1,5 @@
 {
-  "name": "Speek Easy",
+  "name": "Speak Easy",
   "description": "An AI-powered accessibility platform for sign language translation, speech-to-text, and dyslexia-friendly reading.",
   "requestFramePermissions": [
     "camera",

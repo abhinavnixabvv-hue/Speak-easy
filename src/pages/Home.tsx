@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'motion/react';
 import { 
   Hand, 
   Mic, 
@@ -26,13 +25,7 @@ const FeatureCard: React.FC<{
   color: string;
   delay: number;
 }> = ({ to, title, description, icon: Icon, color, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay }}
-    whileHover={{ y: -5 }}
-  >
+  <div>
     <Link to={to} className="block h-full">
       <div className="glass-panel p-8 rounded-3xl h-full flex flex-col group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${color} text-white shadow-lg`}>
@@ -47,17 +40,11 @@ const FeatureCard: React.FC<{
         </div>
       </div>
     </Link>
-  </motion.div>
+  </div>
 );
 
 const Step: React.FC<{ number: string; title: string; description: string; delay: number }> = ({ number, title, description, delay }) => (
-  <motion.div 
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay }}
-    className="flex gap-6 items-start"
-  >
+  <div className="flex gap-6 items-start">
     <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xl shrink-0 shadow-lg shadow-blue-500/30">
       {number}
     </div>
@@ -65,7 +52,7 @@ const Step: React.FC<{ number: string; title: string; description: string; delay
       <h4 className="text-xl font-bold">{title}</h4>
       <p className="text-slate-500 dark:text-slate-400 leading-relaxed">{description}</p>
     </div>
-  </motion.div>
+  </div>
 );
 
 export const Home: React.FC = () => {
@@ -77,38 +64,28 @@ export const Home: React.FC = () => {
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-rose-500/10 blur-[100px] rounded-full -z-10" />
         
         <div className="text-center space-y-10 max-w-5xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
+          <div
             className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-widest mb-4 border border-indigo-100 dark:border-indigo-800"
           >
             <Sparkles size={14} /> Next-Gen Accessibility
-          </motion.div>
+          </div>
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+          <h1 
             className="text-7xl md:text-9xl font-black tracking-tighter leading-[0.85] text-slate-950 dark:text-white"
           >
             SPEAK <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-rose-500 to-amber-500">WITHOUT</span> <br />
             LIMITS.
-          </motion.h1>
+          </h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+          <p 
             className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium"
           >
             The world's most advanced AI platform for communication accessibility. 
             Translate signs, transcribe speech, and read with confidence.
-          </motion.p>
+          </p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <div 
             className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6"
           >
             <Link 
@@ -116,7 +93,7 @@ export const Home: React.FC = () => {
               className="group relative px-12 py-6 bg-slate-950 dark:bg-white text-white dark:text-slate-950 rounded-full font-black text-xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl"
             >
               <span className="relative z-10">GET STARTED</span>
-              <motion.div 
+              <div 
                 className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity"
               />
             </Link>
@@ -126,7 +103,7 @@ export const Home: React.FC = () => {
             >
               OUR STORY
             </button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -282,10 +259,8 @@ export const Home: React.FC = () => {
               <div className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl backdrop-blur-sm">
                 <MessageSquare className="text-indigo-200" />
                 <div className="flex-1 h-2 bg-white/20 rounded-full overflow-hidden">
-                  <motion.div 
-                    animate={{ x: ['-100%', '100%'] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="w-1/2 h-full bg-white/40"
+                  <div 
+                    className="w-1/2 h-full bg-white/40 animate-pulse"
                   />
                 </div>
               </div>
@@ -371,14 +346,14 @@ export const Home: React.FC = () => {
         <p className="text-2xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
           Join thousands of users who are already using SpeakEasy to communicate more effectively every day.
         </p>
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="pt-4">
+        <div className="pt-4">
           <Link 
             to="/sign-to-speech" 
             className="inline-block px-16 py-8 bg-indigo-600 text-white rounded-full font-black text-2xl shadow-2xl shadow-indigo-500/40 hover:bg-indigo-700 transition-all uppercase tracking-widest"
           >
             Start Communicating
           </Link>
-        </motion.div>
+        </div>
       </section>
 
       {/* Footer */}

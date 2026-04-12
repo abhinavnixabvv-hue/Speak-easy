@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Send, Sparkles, User, Bot, Loader2, Volume2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { GoogleGenAI } from "@google/genai";
@@ -115,54 +114,46 @@ export const AIChat: React.FC = () => {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
-        <AnimatePresence initial={false}>
-          {messages.map((message) => (
-            <motion.div
-              key={message.id}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`flex gap-3 max-w-[80%] ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
-                  message.sender === 'user' ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
-                }`}>
-                  {message.sender === 'user' ? <User size={20} /> : <Bot size={20} />}
-                </div>
-                <div className={`p-4 rounded-2xl shadow-sm relative group ${
-                  message.sender === 'user' 
-                    ? 'bg-indigo-600 text-white rounded-tr-none' 
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-tl-none'
-                }`}>
-                  <p className="leading-relaxed">{message.text}</p>
-                  {message.isPolished && (
-                    <button 
-                      onClick={() => speak(message.text)}
-                      className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 bg-white dark:bg-slate-800 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity text-indigo-600"
-                      title="Speak aloud"
-                    >
-                      <Volume2 size={18} />
-                    </button>
-                  )}
-                  <span className="text-[10px] opacity-50 mt-2 block">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex justify-start"
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
+            <div className={`flex gap-3 max-w-[80%] ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
+                message.sender === 'user' ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+              }`}>
+                {message.sender === 'user' ? <User size={20} /> : <Bot size={20} />}
+              </div>
+              <div className={`p-4 rounded-2xl shadow-sm relative group ${
+                message.sender === 'user' 
+                  ? 'bg-indigo-600 text-white rounded-tr-none' 
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-tl-none'
+              }`}>
+                <p className="leading-relaxed">{message.text}</p>
+                {message.isPolished && (
+                  <button 
+                    onClick={() => speak(message.text)}
+                    className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 bg-white dark:bg-slate-800 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity text-indigo-600"
+                    title="Speak aloud"
+                  >
+                    <Volume2 size={18} />
+                  </button>
+                )}
+                <span className="text-[10px] opacity-50 mt-2 block">
+                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+        {isLoading && (
+          <div className="flex justify-start">
             <div className="flex gap-3 items-center bg-slate-100 dark:bg-slate-800 p-4 rounded-2xl rounded-tl-none">
               <Loader2 size={18} className="animate-spin text-indigo-600" />
               <span className="text-sm text-slate-500">AI is thinking...</span>
             </div>
-          </motion.div>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>

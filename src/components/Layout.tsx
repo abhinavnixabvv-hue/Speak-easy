@@ -15,7 +15,6 @@ import {
   MessageSquare,
   Eye
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { useSettings } from './SettingsContext';
 
@@ -56,7 +55,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <div className="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/30">
               <Accessibility size={24} />
             </div>
-            <span className="font-bold text-xl tracking-tight hidden sm:block">Speek Easy</span>
+            <span className="font-bold text-xl tracking-tight hidden sm:block">Speak Easy</span>
           </Link>
         </div>
 
@@ -129,7 +128,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   <div className="bg-indigo-600 p-2 rounded-xl text-white">
                     <Accessibility size={24} />
                   </div>
-                  <span className="font-bold text-xl">Speek Easy</span>
+                  <span className="font-bold text-xl">Speak Easy</span>
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
                   <X size={24} />

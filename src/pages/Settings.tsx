@@ -1,6 +1,5 @@
 import React from 'react';
 import { Settings as SettingsIcon, Sun, Moon, Accessibility, Volume2, Info, Github } from 'lucide-react';
-import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 import { useSettings } from '../components/SettingsContext';
 
@@ -61,9 +60,11 @@ export const Settings: React.FC = () => {
                     settings.highContrast ? "bg-blue-600" : "bg-slate-200 dark:bg-slate-800"
                   )}
                 >
-                  <motion.div
-                    animate={{ x: settings.highContrast ? 24 : 4 }}
-                    className="absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm"
+                  <div
+                    className={cn(
+                      "absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all",
+                      settings.highContrast ? "left-[24px]" : "left-[4px]"
+                    )}
                   />
                 </button>
               </div>

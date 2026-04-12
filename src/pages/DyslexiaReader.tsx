@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, Play, Pause, RotateCcw, Type, AlignLeft, Sun, Moon, Accessibility, Sparkles, Loader2, Copy, Download } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { useSettings } from '../components/SettingsContext';
 import { GoogleGenAI } from "@google/genai";
@@ -170,15 +169,10 @@ export const DyslexiaReader: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-3 space-y-6">
-          <AnimatePresence mode="wait">
-            {mode === 'edit' ? (
-              <motion.div
-                key="edit"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="glass-panel p-8 rounded-3xl"
-              >
+          {mode === 'edit' ? (
+            <div
+              className="glass-panel p-8 rounded-3xl"
+            >
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
@@ -215,13 +209,9 @@ export const DyslexiaReader: React.FC = () => {
                     Clear
                   </button>
                 </div>
-              </motion.div>
+              </div>
             ) : (
-              <motion.div
-                key="read"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+              <div
                 className="glass-panel p-12 rounded-3xl min-h-[500px]"
               >
                 <div className={cn(
@@ -229,25 +219,24 @@ export const DyslexiaReader: React.FC = () => {
                   settings.fontFamily !== 'default' && `font-${settings.fontFamily}`
                 )}>
                   {words.map((word, index) => (
-                    <motion.span
+                    <span
                       key={index}
-                      animate={{
-                        scale: index === currentWordIndex ? 1.1 : 1,
+                      style={{
                         backgroundColor: index === currentWordIndex ? '#3b82f6' : 'transparent',
                         color: index === currentWordIndex ? '#ffffff' : 'inherit',
+                        transform: index === currentWordIndex ? 'scale(1.1)' : 'scale(1)',
                       }}
                       className={cn(
-                        "px-2 rounded-lg transition-colors duration-200",
+                        "px-2 rounded-lg transition-all duration-200",
                         index === currentWordIndex ? "shadow-lg shadow-blue-500/30" : "text-slate-700 dark:text-slate-300"
                       )}
                     >
                       {word}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
 
           {mode === 'read' && (
             <div className="glass-panel p-6 rounded-3xl flex items-center justify-center gap-6">
@@ -305,9 +294,11 @@ export const DyslexiaReader: React.FC = () => {
                     settings.highContrast ? "bg-blue-600" : "bg-slate-200 dark:bg-slate-800"
                   )}
                 >
-                  <motion.div
-                    animate={{ x: settings.highContrast ? 24 : 4 }}
-                    className="absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm"
+                  <div
+                    className={cn(
+                      "absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-200",
+                      settings.highContrast ? "left-[24px]" : "left-[4px]"
+                    )}
                   />
                 </button>
               </div>

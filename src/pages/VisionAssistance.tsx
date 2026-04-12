@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'motion/react';
 import { Camera, Eye, Loader2, Volume2, RefreshCw, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { GoogleGenAI } from "@google/genai";
@@ -202,11 +201,7 @@ export const VisionAssistance: React.FC = () => {
             
             <div className="flex-1 flex flex-col justify-center text-center space-y-6">
               {description ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-6"
-                >
+                <div className="space-y-6">
                   <p className="text-2xl font-medium leading-relaxed text-slate-800 dark:text-slate-200">
                     "{description}"
                   </p>
@@ -216,7 +211,7 @@ export const VisionAssistance: React.FC = () => {
                   >
                     <Volume2 size={20} /> Repeat Audio
                   </button>
-                </motion.div>
+                </div>
               ) : (
                 <div className="text-slate-400 space-y-4">
                   <Eye size={64} className="mx-auto opacity-20" />
