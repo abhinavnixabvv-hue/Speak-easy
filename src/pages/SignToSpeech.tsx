@@ -1,14 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, Camera, CameraOff, Info, Hand, Loader2, Trash2, BookOpen, Type, Siren, Activity, Database, Mic } from "lucide-react";
+import { ArrowLeft, Camera, CameraOff, Info, Hand, Loader2, Trash2, BookOpen, Siren, Activity, Database, Type } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { useHandLandmarker } from "@/src/hooks/useHandLandmarker";
 import { usePoseLandmarker } from "@/src/hooks/usePoseLandmarker";
 import { classifyGesture, classifyTwoHandGesture, type GestureResult } from "@/src/lib/gestureClassifier";
 import { HandLandmarkCanvas } from "@/src/components/HandLandmarkCanvas";
 import { SignLanguageLibrary } from "@/src/components/SignLanguageLibrary";
-import { TextToSign } from "@/src/components/TextToSign";
-import { SpeechToSign } from "@/src/components/SpeechToSign";
 import { EmergencySigns } from "@/src/components/EmergencySigns";
 import { ModelInsights } from "@/src/components/ModelInsights";
 import { LandmarkDataCollector } from "@/src/components/LandmarkDataCollector";
@@ -19,7 +17,7 @@ import type { NormalizedLandmark } from "@mediapipe/tasks-vision";
 
 type SignLanguage = 'ASL' | 'ISL';
 
-type SignTab = "camera" | "library" | "textToSign" | "speechToSign" | "emergency" | "insights" | "collector";
+type SignTab = "camera" | "library" | "emergency" | "insights" | "collector";
 
 interface SignLanguageRecognitionProps {
   onBack?: () => void;
@@ -117,7 +115,7 @@ export const SignToSpeech: React.FC<SignLanguageRecognitionProps> = ({ onBack })
       }
       lastMediaPipeTimestampRef.current = timestamp;
       
-      const handResult = detectHands(video, timestamp);
+      const handResult = detectHands(video);
       const poseResult = detectPose(video, timestamp);
       
       const poseLandmarks = poseResult?.landmarks[0];
@@ -353,28 +351,6 @@ export const SignToSpeech: React.FC<SignLanguageRecognitionProps> = ({ onBack })
             >
               <BookOpen className="h-4 w-4" />
               Sign Library
-            </button>
-            <button
-              onClick={() => setActiveTab("textToSign")}
-              className={`flex-1 flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all whitespace-nowrap ${
-                activeTab === "textToSign"
-                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-              }`}
-            >
-              <Type className="h-4 w-4" />
-              Text to Sign
-            </button>
-            <button
-              onClick={() => setActiveTab("speechToSign")}
-              className={`flex-1 flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all whitespace-nowrap ${
-                activeTab === "speechToSign"
-                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-              }`}
-            >
-              <Mic className="h-4 w-4" />
-              Speech to Sign
             </button>
             <button
               onClick={() => setActiveTab("emergency")}
@@ -668,10 +644,6 @@ export const SignToSpeech: React.FC<SignLanguageRecognitionProps> = ({ onBack })
         </div>
         ) : activeTab === "library" ? (
           <SignLanguageLibrary language={language} />
-        ) : activeTab === "textToSign" ? (
-          <TextToSign />
-        ) : activeTab === "speechToSign" ? (
-          <SpeechToSign />
         ) : activeTab === "insights" ? (
           <ModelInsights />
         ) : activeTab === "collector" ? (

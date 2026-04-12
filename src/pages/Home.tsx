@@ -433,7 +433,7 @@ export const Home: React.FC = () => {
           <div className="flex gap-6">
             <a href="#" className="hover:text-blue-600 transition-colors">Twitter</a>
             <a href="#" className="hover:text-blue-600 transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-blue-600 transition-colors">GitHub</a>
+            <a href="https://github.com/abhinavnixabvv-hue" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">GitHub</a>
           </div>
         </div>
       </footer>
