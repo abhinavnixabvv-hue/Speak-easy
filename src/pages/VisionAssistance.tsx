@@ -13,7 +13,7 @@ export const VisionAssistance: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [language, setLanguage] = useState('en-US');
 
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const ai = React.useMemo(() => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' }), []);
 
   const startCamera = async () => {
     try {

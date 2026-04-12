@@ -16,7 +16,7 @@ export const DyslexiaReader: React.FC = () => {
   const synth = window.speechSynthesis;
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const ai = React.useMemo(() => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' }), []);
 
   const words = text.split(/\s+/).filter(w => w.length > 0);
 

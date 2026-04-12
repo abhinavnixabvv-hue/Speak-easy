@@ -41,7 +41,7 @@ export const SpeechToText: React.FC = () => {
   });
   const recognitionRef = useRef<any>(null);
 
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const ai = React.useMemo(() => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' }), []);
 
   const handlePolish = async () => {
     if (!transcript || isPolishing) return;
