@@ -396,9 +396,9 @@ export const Home: React.FC = () => {
             <h4 className="font-black text-xl uppercase tracking-tighter">Company</h4>
             <ul className="space-y-4 text-slate-500 dark:text-slate-400 font-medium">
               <li><button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-indigo-600 transition-colors">About Us</button></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Terms of Service</a></li>
+              <li><Link to="/" className="hover:text-indigo-600 transition-colors">Contact</Link></li>
+              <li><Link to="/" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/" className="hover:text-indigo-600 transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
@@ -406,8 +406,8 @@ export const Home: React.FC = () => {
         <div className="py-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
           <p>© 2026 SpeakEasy. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-blue-600 transition-colors">Twitter</a>
-            <a href="#" className="hover:text-blue-600 transition-colors">LinkedIn</a>
+            <Link to="/" className="hover:text-blue-600 transition-colors">Twitter</Link>
+            <Link to="/" className="hover:text-blue-600 transition-colors">LinkedIn</Link>
             <a href="https://github.com/abhinavnixabvv-hue" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">GitHub</a>
           </div>
         </div>

@@ -146,7 +146,9 @@ export const Settings: React.FC = () => {
             <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <span className="text-sm font-medium text-slate-500">Version 1.0.0</span>
               <a 
-                href="#" 
+                href="https://github.com/abhinavnixabvv-hue" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-blue-600 font-bold hover:underline"
               >
                 <Github size={18} /> Source Code

@@ -106,7 +106,18 @@ export const SpeechToText: React.FC = () => {
       };
 
       recognition.onerror = (event: any) => {
+        if (event.error === 'no-speech') {
+          // Quietly handle no-speech, it just means the user was silent
+          setIsListening(false);
+          return;
+        }
+        if (event.error === 'aborted') {
+          // Aborted usually means it was stopped manually or by a conflict
+          setIsListening(false);
+          return;
+        }
         console.error('Speech recognition error', event.error);
+        toast.error(`Speech recognition error: ${event.error}`);
         setIsListening(false);
       };
 

@@ -20,21 +20,19 @@ import { Toaster } from 'sonner';
 export default function App() {
   return (
     <SettingsProvider>
-      <Router>
-        <Layout>
-          <Toaster position="top-right" richColors />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sign-to-speech" element={<SignToSpeech />} />
-            <Route path="/speech-to-text" element={<SpeechToText />} />
-            <Route path="/text-to-speech" element={<TextToSpeech />} />
-            <Route path="/dyslexia-reader" element={<DyslexiaReader />} />
-            <Route path="/ai-chat" element={<AIChat />} />
-            <Route path="/vision-assistance" element={<VisionAssistance />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <Layout>
+        <Toaster position="top-right" richColors />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-to-speech" element={<SignToSpeech />} />
+          <Route path="/speech-to-text" element={<SpeechToText />} />
+          <Route path="/text-to-speech" element={<TextToSpeech />} />
+          <Route path="/dyslexia-reader" element={<DyslexiaReader />} />
+          <Route path="/ai-chat" element={<AIChat />} />
+          <Route path="/vision-assistance" element={<VisionAssistance />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Layout>
     </SettingsProvider>
   );
 }
