@@ -55,7 +55,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <div className="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/30">
               <Accessibility size={24} />
             </div>
-            <span className="font-bold text-xl tracking-tight hidden sm:block">Speak Easy</span>
+            <span className="font-bold text-xl tracking-tight hidden sm:block">SpeakEasy</span>
           </Link>
         </div>
 
@@ -128,7 +128,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   <div className="bg-indigo-600 p-2 rounded-xl text-white">
                     <Accessibility size={24} />
                   </div>
-                  <span className="font-bold text-xl">Speak Easy</span>
+                  <span className="font-bold text-xl">SpeakEasy</span>
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
                   <X size={24} />
