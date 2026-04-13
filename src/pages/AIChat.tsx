@@ -50,6 +50,10 @@ export const AIChat: React.FC = () => {
     setIsLoading(true);
 
     try {
+      if (!process.env.GEMINI_API_KEY) {
+        toast.error('Gemini API Key is missing. Please configure it in Settings.');
+        return;
+      }
       const prompt = language === 'ml-IN'
         ? `Convert the following simple or fragmented input into a polite, complete, and natural-sounding sentence in Malayalam for someone with a communication disability. 
         Input: "${input}"
@@ -58,16 +62,16 @@ export const AIChat: React.FC = () => {
         Input: "${input}"
         Output:`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: prompt,
-      });
+      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
 
-      if (!response.text) throw new Error('Failed to polish sentence');
+      if (!text) throw new Error('Failed to polish sentence');
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: response.text.trim(),
+        text: text.trim(),
         sender: 'ai',
         timestamp: new Date(),
         isPolished: true,

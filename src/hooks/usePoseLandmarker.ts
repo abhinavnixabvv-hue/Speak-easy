@@ -11,7 +11,7 @@ export const usePoseLandmarker = () => {
     setIsModelLoading(true);
     try {
       const vision = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.34/wasm"
       );
       poseLandmarkerRef.current = await PoseLandmarker.createFromOptions(vision, {
         baseOptions: {

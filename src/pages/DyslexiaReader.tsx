@@ -25,6 +25,10 @@ export const DyslexiaReader: React.FC = () => {
     
     setIsSummarizing(true);
     try {
+      if (!process.env.GEMINI_API_KEY) {
+        toast.error('Gemini API Key is missing. Please configure it in Settings.');
+        return;
+      }
       const prompt = language === 'ml-IN'
         ? `Simplify the following Malayalam text for someone with dyslexia. Break it into small, easy-to-read chunks or bullet points. Use simple language but maintain the original meaning.
         Text: "${text}"
@@ -33,14 +37,14 @@ export const DyslexiaReader: React.FC = () => {
         Text: "${text}"
         Simplified:`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: prompt,
-      });
+      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const textResult = response.text();
       
-      if (!response.text) throw new Error('Simplification failed');
+      if (!textResult) throw new Error('Simplification failed');
       
-      setText(response.text.trim());
+      setText(textResult.trim());
       setMode('read');
       toast.success('Text simplified and chunked by AI');
     } catch (error) {

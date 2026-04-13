@@ -47,15 +47,21 @@ export const SpeechToText: React.FC = () => {
     if (!transcript || isPolishing) return;
     setIsPolishing(true);
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `Please fix the punctuation, grammar, and capitalization of the following transcript. Maintain the original meaning and language.
+      if (!process.env.GEMINI_API_KEY) {
+        toast.error('Gemini API Key is missing. Please configure it in Settings.');
+        return;
+      }
+      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const prompt = `Please fix the punctuation, grammar, and capitalization of the following transcript. Maintain the original meaning and language.
         Transcript: "${transcript}"
-        Polished:`,
-      });
+        Polished:`;
+      
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
 
-      if (!response.text) throw new Error('Failed to polish transcript');
-      setTranscript(response.text.trim());
+      if (!text) throw new Error('Failed to polish transcript');
+      setTranscript(text.trim());
       toast.success('Transcript polished by AI');
     } catch (error) {
       console.error('Polish Error:', error);

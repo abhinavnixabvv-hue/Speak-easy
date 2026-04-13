@@ -76,24 +76,31 @@ export const VisionAssistance: React.FC = () => {
       const base64Data = imageData.split(',')[1];
       
       try {
+        if (!process.env.GEMINI_API_KEY) {
+          toast.error('Gemini API Key is missing. Please configure it in Settings.');
+          return;
+        }
         const prompt = language === 'ml-IN' 
           ? "നിങ്ങൾ ഒരു കാഴ്ചപരിമിതിയുള്ള വ്യക്തിയെ സഹായിക്കുകയാണ്. ഈ ചിത്രത്തിലുള്ള കാര്യങ്ങൾ വളരെ വ്യക്തമായും ലളിതമായും മലയാളത്തിൽ വിവരിക്കുക. പ്രധാനപ്പെട്ട വസ്തുക്കൾ, അവയുടെ സ്ഥാനം, ചുറ്റുപാട് എന്നിവയെക്കുറിച്ച് പറയുക. വിവരണം 3 വാചകങ്ങളിൽ കൂടരുത്."
           : "You are assisting a visually impaired person. Describe the scene in front of them with high precision. Identify key objects, their relative positions (left, right, center, foreground, background), and any potential obstacles or important context. Be concise but descriptive. Keep it under 3 sentences.";
 
-        const response = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
-          contents: {
-            parts: [
-              { text: prompt },
-              { inlineData: { data: base64Data, mimeType: "image/jpeg" } }
-            ]
+        const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const result = await model.generateContent([
+          prompt,
+          {
+            inlineData: {
+              data: base64Data,
+              mimeType: "image/jpeg"
+            }
           }
-        });
+        ]);
+        const response = await result.response;
+        const text = response.text();
 
-        if (!response.text) throw new Error('Failed to analyze scene');
+        if (!text) throw new Error('Failed to analyze scene');
 
-        setDescription(response.text.trim());
-        speak(response.text.trim());
+        setDescription(text.trim());
+        speak(text.trim());
       } catch (err) {
         console.error('Analysis Error:', err);
         toast.error('Failed to analyze scene');
