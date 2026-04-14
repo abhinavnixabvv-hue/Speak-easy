@@ -37,10 +37,11 @@ export const DyslexiaReader: React.FC = () => {
         Text: "${text}"
         Simplified:`;
 
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const textResult = response.text();
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: prompt,
+      });
+      const textResult = response.text;
       
       if (!textResult) throw new Error('Simplification failed');
       

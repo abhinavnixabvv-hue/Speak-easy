@@ -62,10 +62,11 @@ export const AIChat: React.FC = () => {
         Input: "${input}"
         Output:`;
 
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: prompt,
+      });
+      const text = response.text;
 
       if (!text) throw new Error('Failed to polish sentence');
 
