@@ -63,8 +63,8 @@ export const AIChat: React.FC = () => {
         Output:`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: prompt,
+        model: "gemini-flash-latest",
+        contents: [{ parts: [{ text: prompt }] }],
       });
       const text = response.text;
 

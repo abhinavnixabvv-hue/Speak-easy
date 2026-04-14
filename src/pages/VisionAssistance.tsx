@@ -85,16 +85,18 @@ export const VisionAssistance: React.FC = () => {
           : "You are assisting a visually impaired person. Describe the scene in front of them with high precision. Identify key objects, their relative positions (left, right, center, foreground, background), and any potential obstacles or important context. Be concise but descriptive. Keep it under 3 sentences.";
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash",
-          contents: [
-            prompt,
-            {
-              inlineData: {
-                data: base64Data,
-                mimeType: "image/jpeg"
+          model: "gemini-flash-latest",
+          contents: [{
+            parts: [
+              { text: prompt },
+              {
+                inlineData: {
+                  data: base64Data,
+                  mimeType: "image/jpeg"
+                }
               }
-            }
-          ]
+            ]
+          }]
         });
         const text = response.text;
 

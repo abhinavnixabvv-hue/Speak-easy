@@ -38,8 +38,8 @@ export const DyslexiaReader: React.FC = () => {
         Simplified:`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: prompt,
+        model: "gemini-flash-latest",
+        contents: [{ parts: [{ text: prompt }] }],
       });
       const textResult = response.text;
       

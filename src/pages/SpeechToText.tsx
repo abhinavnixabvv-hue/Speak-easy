@@ -55,8 +55,8 @@ export const SpeechToText: React.FC = () => {
         Transcript: "${transcript}"
         Polished:`;
       const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: prompt,
+        model: "gemini-flash-latest",
+        contents: [{ parts: [{ text: prompt }] }],
       });
       const text = response.text;
 
